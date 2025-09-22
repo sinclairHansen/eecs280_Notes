@@ -165,4 +165,15 @@ int main(int argc, char *argv[])
         t1.scale(2); //Calls member function
         cout << t1.perimeter();
     }
+
+    //Constructors
+    // Whenever you create an object of class type, a constructor for that class is called on the object to initialize it. ALWAYS
+    // A constructor is basically a function, but you don't call it yourself - the compiler does it automatically
+    // All of these use a Triangle constructor
+    Triangle t1;
+    Triangle t2(3, 4, 5);
+    Triangle t3 = Triangle(3,4,5);
+
+    //Do not do
+    // Triangle t1(); -> that is a function declaration.
 }
