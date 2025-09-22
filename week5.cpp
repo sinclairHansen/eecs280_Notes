@@ -113,4 +113,56 @@ int main(int argc, char *argv[])
     //stod() parses a double encoded in a string
     
 
+
+
+
+
+    /* ABSTRACT DATA TYPES IN C++
+
+    In C-style ADTs, we have a structure that is independent 
+    ex
+    struct Triangle{double a, b, c};
+
+    Then the funcitons for this structure are made on their own
+
+    void Triangle_init(..){..};
+
+    within the main, we call the structure:
+        Triangle t1;
+    
+    Then initialize it:
+        Triangle_init(...);
+
+    Moving on to C++ style ADTs we get classes. They combine the structure with the member funcitons
+
+    Struct -> C style, contains only data, undefined by default, all data is accessible
+
+    Class -> heterogeneous aggregate data type, C++ style, contains data and functions, constructors can be used to initalize, control of data access  
+    */
+
+
+    //Lets make Triangle a C++ ADT
+
+    class Triangle{
+        private: //Private means we can only access these variables within the scope of the class
+            double a;
+            double b;
+            double c;
+        public: //Sometimes its better to put public first. If people are reading through code they care more about the interface
+            Triangle(double a_in, double b_in, double c_in){...}
+
+            double perimeter() const {...}
+            void scale(double s){...}
+
+    }
+    int main(){ //oof third main
+        Triangle t1(3,4,5); // This must be initialized, unless we have a constructor that allows no initialization
+        //or
+        Triangle t1{3,4,5};
+        //OR
+        Triangle t1 = {3,4,5};
+        
+        t1.scale(2); //Calls member function
+        cout << t1.perimeter();
+    }
 }
