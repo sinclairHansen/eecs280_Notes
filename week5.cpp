@@ -149,10 +149,14 @@ int main(int argc, char *argv[])
             double b;
             double c;
         public: //Sometimes its better to put public first. If people are reading through code they care more about the interface
-            Triangle(double a_in, double b_in, double c_in){...}
-
+            Triangle(double a_in, double b_in, double c_in : a(a_in), b(b_in), c(c_in){...} //Constructors are usually public
+            //The part after the : does default initialization for the variables. Otherwise they are not initialized -> usually no beuno
             double perimeter() const {...}
             void scale(double s){...}
+        //Member initializer lists
+        //Warning! the order of initialization depends on the declaration order.
+            // NOT the order of the member initializer list. 
+        //In this ^ class, a will always get initialized first, regardless of what order we put the variables in the constructor
 
     }
     int main(){ //oof third main
@@ -173,7 +177,69 @@ int main(int argc, char *argv[])
     Triangle t1;
     Triangle t2(3, 4, 5);
     Triangle t3 = Triangle(3,4,5);
-
+    //By the time we get to the start of the body of the constructor, all member variables have been initialized.
+    // This means it would be best to have that taken care of prior, so we don't initalize more than once
     //Do not do
     // Triangle t1(); -> that is a function declaration.
+
+
+    //Multiple constructors
+        //A class may have several different constructors
+    
+    class Triangle{
+        private:
+        double a, b, c;
+
+    public:
+        Triangle() : a(1), b(1), c(1) {} // DEFAULT constructor
+
+        Triangle(double side) 
+            : a(side), b(side), c(side) {}
+        
+        Triangle(double a_in, double b_in, double c_in)
+            : a(a_in), b(b_in), c(c_in){}
+        //Depending on what we input when we call the ADT, a different
+            //constructor will get called
+
+        //We don't have to have a default constructor. If so Triangle t1; will not compile
+    }
+
+    //Class-type objects as members
+        //Members are default initialized if left out of the member0initializer list for a constructor
+        // If you put no constructors in the class, then C++ will make a default constructor
+        // If you make a constructor, then you need to make your own default constructor for it to compile a class
+            // call with no arguments. C++ will not make a default constructor automatically in this case.
+
+    //Default initialization
+    /*  Objects that are not explicitly initalized are default initialized
+    Atomic objects (ints, double, bool, char, pointers) are default initialized by doing nothing
+        - They retain whatever value what previously in the memory
+
+        Array objects are default initialized by default
+            initializing each element.
+ ́       Compound (i.e. class-type) objects are default
+            initialized by calling the default constructor.
+
+    The implicit default constructor
+        -If you don’t define any constructors, the
+            compiler provides a default constructor for you.
+
+    struct vs. class
+        In the C++ language, the only difference between the struct and class keywords is the default access levels
+            struct - public by default
+            class - private by default
+        However, by convention we use structs and classes very differently!
+
+    Review: Representation Invariants
+        - A problem for compund types...
+            -Some combinations of member values don't make sense together.
+        We use represenation invariants to express the conditions for a valid compund object
+
+    GET AND SET FUNCTIONS
+         - Some classes provide functions to get and set private member variables
+         The reason we use private variables/functions is to separate the implementation from the user interface.
+         Lets say we want to change the implementation for the Triangle such that we use sides and angles, we can keep the
+         user interface the same but change whats under the hood.
+    */
+
 }
