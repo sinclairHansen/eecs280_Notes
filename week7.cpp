@@ -235,3 +235,139 @@ void print(std::ostream &os) const;
 
 // The static key word means that the value will not be repeated every time
 // an object is called. It helps save memory by only making one copy. 
+
+/*
+IntSet Data Representation
+First, lets pick a representation for the data. What do we need to store?
+    - Store an array of the integers in the set.
+    - Store how many array elements are being used.
+
+    Diversion: Static Data Members
+
+ ́ A data member declared using the static keyword is
+“shared” among all instances of the class.
+ ́ It’s like a global variable, but better.
+ ́ It still has static storage duration, meaning it lives
+throughout the whole program, just like a global.
+ ́ But it lives inside a class’s scope – more organized
+than just being in the global scope.
+
+ ́ To access outside class scope, use IntSet::ELTS_CAPACITY.
+*/
+
+class IntSet {
+public:
+// Maximum capacity of a set.
+static const int ELTS_CAPACITY = 10;
+
+//...
+};
+/*
+Why Fixed Capacity?
+ ́ Basically, our implementation needs to
+know how much space to allocate.
+ ́Right now, this has to be known at
+compile time (e.g. the size of an array to
+store elements in the IntSet).
+ ́When we learn about dynamic memory,
+we’ll see how to fix this...
+
+
+IntSet Data Representation
+ ́ First, let’s pick a representation for the data.
+What do we need to store?
+ ́ Store an array of the integers in the set.
+ ́ Store how many array elements are being used.
+
+
+ Recall: Representation Invariants
+
+ ́ A problem for compound types...
+ ́Some combinations of member values
+don’t make sense together.
+
+ ́ We use representation invariants to
+express the conditions for a valid
+compound object.
+
+IntSet Constructor
+
+ ́ We need to ensure that the representation
+invariants are initially set up correctly.
+ ́ Let’s do this with a constructor.
+*/
+class IntSet {
+public:
+IntSet();
+//...
+};
+
+/*
+Again, we only declare
+the constructor here (in
+the .hpp file) because all
+implementation details
+should go in the .cpp file.
+
+An IntSet Implementation (IntSet.cpp)
+ ́ We define all our member functions separately in the
+.cpp file (using the scope resolution operator ::).
+
+*/
+
+IntSet::IntSet()
+: elts_size(0) { }
+void IntSet::insert(int v) {
+// CODE
+}
+void IntSet::remove(int v) {
+// CODE
+}
+bool IntSet::contains(int v) const {
+// CODE
+}
+/*
+Prefix vs Postfix Increment
+
+Parts of an expression: 1. Evaluation 2. Side effects
+Both will increment the value, but they return at different points
+
+x = 4
+++x will evaluate 4
+x++ will evaluate to 3
+
+Time Complexity
+Question: How long does an algorithm take to execute relative to its input size?
+
+We use the notation O(f) to mean that the complexity of the 
+algorithm is proportional to f, where f is some function of the input size n. 
+
+Some common complexities:
+    - O(1) - constant time.
+    e.g. a single arithmetic operation
+    e.g. Dereferencing a pointer
+
+    - O(n) Linear Time.
+    e.g. Printing out all elements in an array.
+
+    - O(n^2) Quadratic Time
+    e.g. Computing the energy of a Matrix with side length n.
+
+Worst-Case Analysis
+    - We often care most about the complexity of an
+    algorithm in the worst case, over all possible variations of input data for a given input size n.
+
+    Example:
+    - Check if any elements in a container are negative.
+    Best case: The first element happens to be negative. Return true. Best-case
+        time complexity is O(1) time.
+    Worst case: The only negative values are near the very end or there are none - but
+        we still had to check everything. Worst-case complexity = O(n). 
+    
+
+
+*/
+
+
+
+
